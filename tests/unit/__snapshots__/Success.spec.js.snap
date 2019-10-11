@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Create view renders the component and matches snapshot 1`] = `
+<div class="about">
+  <router-link-stub to="/" tag="a" event="click">back</router-link-stub>
+  <h1>Great news! Your flatbond was successfully created.</h1>
+</div>
+`;
