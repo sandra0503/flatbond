@@ -1,9 +1,9 @@
 import { shallowMount } from "@vue/test-utils";
-import Success from "@/views/Success";
+import CreateFlatbondForm from "@/components/CreateFlatbondForm";
 
-describe("Success view", () => {
+describe("CreateFlatbondForm", () => {
   const build = () => {
-    const wrapper = shallowMount(Success);
+    const wrapper = shallowMount(CreateFlatbondForm);
 
     return {
       wrapper

@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CreateFlatbondForm renders the component and matches snapshot 1`] = `
+<div class="create-flatbond-form">
+  <h1>Welcome to flatfair!</h1>
+  <p>Enter your rent and post code to create your personal Flatbond.</p>
+  <b-form-group-stub id="rent-input-fieldset" label="Your rent" labelfor="rent" feedbackarialive="assertive">
+    <b-input-group-stub size="lg" prepend="£" append=".00" tag="div">
+      <b-form-input-stub id="rent" value="" trim="true" type="text"></b-form-input-stub>
+    </b-input-group-stub>
+  </b-form-group-stub>
+  <b-form-group-stub feedbackarialive="assertive">
+    <b-form-radio-stub value="" name="payment-period-radios">Weekly</b-form-radio-stub>
+    <b-form-radio-stub value="" name="payment-period-radios">Monthly</b-form-radio-stub>
+  </b-form-group-stub>
+  <b-form-group-stub id="fieldset-1" label="Your postcode" labelfor="postcode" feedbackarialive="assertive">
+    <b-form-input-stub id="postcode" value="" trim="true" type="text"></b-form-input-stub>
+  </b-form-group-stub>
+</div>
+`;

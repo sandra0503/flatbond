@@ -1,0 +1,15 @@
+//file to override vue bootstrap styles
+
+$blue: #6785ff !default;
+$red: #dc3545 !default;
+
+.custom-control {
+  &.custom-radio {
+    display: inline-block;
+    margin-left: 20px;
+
+    &:first-child {
+      margin: 0;
+    }
+  }
+}
