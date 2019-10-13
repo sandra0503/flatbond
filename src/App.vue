@@ -18,6 +18,7 @@ body {
 
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
+  background: linear-gradient(110deg, #fff 60%, #fbfbfb 60%);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -35,7 +36,7 @@ header {
 
 main {
   height: 100vh;
-  padding-top: 25px;
-  background: linear-gradient(110deg, #fff 60%, #fbfbfb 60%);
+  padding-top: 50px;
+  margin: 0 20px;
 }
 </style>

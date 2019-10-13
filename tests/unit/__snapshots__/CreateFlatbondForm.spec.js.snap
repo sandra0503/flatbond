@@ -1,20 +1,40 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`CreateFlatbondForm renders the component and matches snapshot 1`] = `
-<div class="create-flatbond-form">
-  <h1>Welcome to flatfair!</h1>
-  <p>Enter your rent and post code to create your personal Flatbond.</p>
-  <b-form-group-stub id="rent-input-fieldset" label="Your rent" labelfor="rent" feedbackarialive="assertive">
-    <b-input-group-stub size="lg" prepend="£" append=".00" tag="div">
-      <b-form-input-stub id="rent" value="" trim="true" type="text"></b-form-input-stub>
-    </b-input-group-stub>
-  </b-form-group-stub>
-  <b-form-group-stub feedbackarialive="assertive">
-    <b-form-radio-stub value="" name="payment-period-radios">Weekly</b-form-radio-stub>
-    <b-form-radio-stub value="" name="payment-period-radios">Monthly</b-form-radio-stub>
-  </b-form-group-stub>
-  <b-form-group-stub id="fieldset-1" label="Your postcode" labelfor="postcode" feedbackarialive="assertive">
-    <b-form-input-stub id="postcode" value="" trim="true" type="text"></b-form-input-stub>
-  </b-form-group-stub>
-</div>
+<form class="create-flatbond-form">
+  <div role="group" class="form-group"><label for="rent" class="d-block">Your rent</label>
+    <div>
+      <div role="group" class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text">£</div>
+          <!---->
+        </div><input id="rent-input" type="text" placeholder="Enter your rent" class="form-control">
+        <div class="input-group-append">
+          <div class="input-group-text">.00</div>
+          <!---->
+        </div>
+      </div>
+      <div tabindex="-1" role="alert" aria-live="assertive" aria-atomic="true" class="invalid-feedback">Your weekly rent should be a number between 25 and 2000.</div>
+      <!---->
+      <!---->
+    </div>
+  </div>
+  <fieldset class="form-group">
+    <!---->
+    <div tabindex="-1" role="group">
+      <div class="custom-control custom-radio"><input type="radio" name="payment-period-radios" autocomplete="off" class="custom-control-input" value="weekly"><label class="custom-control-label">Weekly</label></div>
+      <div class="custom-control custom-radio"><input type="radio" name="payment-period-radios" autocomplete="off" class="custom-control-input" value="monthly"><label class="custom-control-label">Monthly</label></div>
+      <!---->
+      <!---->
+      <!---->
+    </div>
+  </fieldset>
+  <div role="group" class="form-group fieldset-postcode"><label for="postcode" class="d-block">Your postcode</label>
+    <div><input id="postcode-input" type="text" placeholder="Enter your postcode" class="form-control">
+      <div tabindex="-1" role="alert" aria-live="assertive" aria-atomic="true" class="invalid-feedback">Please enter a valid postcode.</div>
+      <!---->
+      <!---->
+    </div>
+  </div> <button type="submit" disabled="disabled" class="btn submitButton btn-primary disabled">Submit</button>
+</form>
 `;

@@ -1,7 +1,8 @@
 //file to override vue bootstrap styles
 
 $blue: #6785ff !default;
-$red: #dc3545 !default;
+$red: #ff7675 !default;
+$green: #00cec9;
 
 .custom-control {
   &.custom-radio {
@@ -11,5 +12,10 @@ $red: #dc3545 !default;
     &:first-child {
       margin: 0;
     }
+  }
+}
+.form-group {
+  > label {
+    font-weight: 600;
   }
 }
