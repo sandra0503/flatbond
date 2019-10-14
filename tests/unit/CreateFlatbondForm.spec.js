@@ -1,14 +1,22 @@
 import { mount, createLocalVue } from "@vue/test-utils";
-import CreateFlatbondForm from "@/components/CreateFlatbondForm";
+import Vuex from "vuex";
 import Vuelidate from "vuelidate";
+import CreateFlatbondForm from "@/components/CreateFlatbondForm";
+import initialState from "@/store/state";
 
 const localVue = createLocalVue();
 
+localVue.use(Vuex);
 localVue.use(Vuelidate);
 
 describe("CreateFlatbondForm", () => {
+  let state;
+
   const build = () => {
-    const wrapper = mount(CreateFlatbondForm, { localVue });
+    const wrapper = mount(CreateFlatbondForm, {
+      localVue,
+      store: new Vuex.Store({ state })
+    });
 
     return {
       wrapper,
@@ -17,6 +25,10 @@ describe("CreateFlatbondForm", () => {
       submitButton: () => wrapper.find(".btn.btn-primary")
     };
   };
+
+  beforeEach(() => {
+    state = { ...initialState };
+  });
 
   it("renders the component and matches snapshot", () => {
     const { wrapper } = build();
@@ -87,5 +99,95 @@ describe("CreateFlatbondForm", () => {
     wrapper.vm.$forceUpdate();
 
     expect(submitButton().classes()).not.toContain("disabled");
+  });
+
+  describe("membership fee calculation", () => {
+    it("returns a number", () => {
+      const { wrapper } = build();
+      expect(typeof wrapper.vm.membershipFee).toBe("number");
+    });
+
+    it("returns zero when no rent is put in", () => {
+      const { wrapper } = build();
+      expect(wrapper.vm.membershipFee).toBe(0);
+    });
+
+    it("returns zero when no rent is put in", () => {
+      const { wrapper } = build();
+      expect(wrapper.vm.membershipFee).toBe(0);
+    });
+
+    it("returns zero when input is invalid", () => {
+      const { wrapper, rentInput } = build();
+
+      rentInput().vm.$emit("input", "abc2323");
+      expect(wrapper.vm.membershipFee).toBe(0);
+    });
+
+    it("returns zero when input is invalid", () => {
+      const { wrapper, rentInput } = build();
+
+      rentInput().vm.$emit("input", "12.12");
+      expect(wrapper.vm.membershipFee).toBe(0);
+    });
+
+    it("returns the fixed membership fee when fixed fee is true", () => {
+      state.feeConfig = {
+        fixedMembershipFee: true,
+        fixedMembershipFeeAmount: "120"
+      };
+      const { wrapper, rentInput } = build();
+
+      rentInput().vm.$emit("input", "500");
+
+      expect(wrapper.vm.membershipFee).toBe(144);
+    });
+
+    it("returns variable membership fee when fixed fee is false", () => {
+      state.feeConfig = {
+        fixedMembershipFee: false,
+        fixedMembershipFeeAmount: "120"
+      };
+      const { wrapper, rentInput } = build();
+
+      rentInput().vm.$emit("input", "600");
+      wrapper.vm.form.rentPeriod = "monthly";
+
+      expect(wrapper.vm.membershipFee).toBe(166);
+    });
+
+    it("returns the minimum membership fee", () => {
+      const { wrapper, rentInput } = build();
+
+      rentInput().vm.$emit("input", "1");
+      expect(wrapper.vm.membershipFee).toBe(144);
+    });
+
+    it("returns the correct membership fee for monthly rent 1257", () => {
+      const { wrapper, rentInput } = build();
+
+      wrapper.vm.form.rentPeriod = "monthly";
+
+      rentInput().vm.$emit("input", "1257");
+      expect(wrapper.vm.membershipFee).toBe(348);
+    });
+
+    it("returns the correct membership fee", () => {
+      const { wrapper, rentInput } = build();
+
+      wrapper.vm.form.rentPeriod = "monthly";
+
+      rentInput().vm.$emit("input", "1500");
+      expect(wrapper.vm.membershipFee).toBe(415);
+    });
+
+    it("returns the correct membership fee", () => {
+      const { wrapper, rentInput } = build();
+
+      wrapper.vm.form.rentPeriod = "monthly";
+
+      rentInput().vm.$emit("input", "9999");
+      expect(wrapper.vm.membershipFee).toBe(2769);
+    });
   });
 });

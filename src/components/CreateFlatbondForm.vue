@@ -34,6 +34,10 @@
       >
     </b-form-group>
 
+    <b-form-group label="Your fee" label-for="fee">
+      <div class="membership-fee">{{ membershipFee }}</div>
+    </b-form-group>
+
     <b-form-group
       :invalid-feedback="invalidFeedbackPostcode"
       :state="$v.form.postcode.$dirty ? !$v.form.postcode.$error : null"
@@ -61,6 +65,8 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 import {
   between,
   minLength,
@@ -72,7 +78,10 @@ import {
   MINIMUM_MONTHLY,
   MAXIMUM_MONTHLY,
   MINIMUM_WEEKLY,
-  MAXIMUM_WEEKLY
+  MAXIMUM_WEEKLY,
+  VAT_FACTOR,
+  WEEKLY_FACTOR,
+  MINIMUM_MEMBERSHIP_FEE
 } from "../config.json";
 
 import {
@@ -109,6 +118,7 @@ export default {
     };
   },
   computed: {
+    ...mapState(["feeConfig"]),
     minimumRent() {
       return this.form.rentPeriod === PERIODS.MONTHLY
         ? MINIMUM_MONTHLY
@@ -127,6 +137,30 @@ export default {
     },
     invalidFeedbackPostcode() {
       return "Please enter a valid postcode.";
+    },
+    weeklyRent() {
+      if (!this.form.rent || !parseInt(this.form.rent)) {
+        return null;
+      }
+
+      return this.form.rentPeriod === PERIODS.WEEKLY
+        ? parseFloat(this.form.rent).toFixed(2)
+        : (parseFloat(this.form.rent) / WEEKLY_FACTOR).toFixed(2);
+    },
+    membershipFee() {
+      if (!this.weeklyRent) {
+        return 0;
+      }
+
+      if (this.feeConfig.fixedMembershipFee) {
+        return this.feeConfig.fixedMembershipFeeAmount
+          ? this.addVAT(this.feeConfig.fixedMembershipFeeAmount)
+          : null;
+      }
+
+      const feeBasis = Math.max(MINIMUM_MEMBERSHIP_FEE, this.weeklyRent);
+
+      return parseInt(this.addVAT(feeBasis).toFixed(0));
     }
   },
   validations() {
@@ -155,6 +189,9 @@ export default {
     setPostcode(postcode) {
       this.postcode = postcode.toUpperCase();
       this.$v.form.postcode.$model = this.postcode;
+    },
+    addVAT(amount) {
+      return amount * VAT_FACTOR;
     }
   }
 };

@@ -29,6 +29,14 @@ exports[`CreateFlatbondForm renders the component and matches snapshot 1`] = `
       <!---->
     </div>
   </fieldset>
+  <div role="group" class="form-group"><label for="fee" class="d-block">Your fee</label>
+    <div>
+      <div class="membership-fee">0</div>
+      <!---->
+      <!---->
+      <!---->
+    </div>
+  </div>
   <div role="group" class="form-group fieldset-postcode"><label for="postcode" class="d-block">Your postcode</label>
     <div><input id="postcode-input" type="text" placeholder="Enter your postcode" class="form-control">
       <div tabindex="-1" role="alert" aria-live="assertive" aria-atomic="true" class="invalid-feedback">Please enter a valid postcode.</div>
