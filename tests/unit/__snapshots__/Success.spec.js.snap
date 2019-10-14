@@ -1,8 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Success view renders the component and matches snapshot 1`] = `
-<div class="about">
+<div class="success">
   <router-link-stub to="/" tag="a" event="click">back</router-link-stub>
-  <h1>Great news! Your flatbond was successfully created.</h1>
+  <h1>Thank you!</h1>
+  <div>Your flatbond was created with the following details:</div>
+  <div>Monthly rent:</div>
+  <div class="rentValue">200.00 £</div>
+  <div>Membership fee:</div>
+  <div class="feeValue">144 £</div>
+  <div>Postcode:</div>
+  <div class="postcodeValue">WC2N 5DU</div>
 </div>
 `;

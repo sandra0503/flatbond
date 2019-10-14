@@ -23,16 +23,15 @@ export async function fetchConfig() {
   return feeConfig;
 }
 
-export function createFlatbond() {
+export async function createFlatbond(rent, postcode) {
   let status;
 
-  instance
+  await instance
     .post("/flatbond", {
-      rent: "2000",
-      postcode: "WC2N 5DU"
+      rent: rent,
+      postcode: postcode
     })
     .then(result => {
-      console.log(result);
       status = result.data;
     })
     .catch(err => console.log(err));

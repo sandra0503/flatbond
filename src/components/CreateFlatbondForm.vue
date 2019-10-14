@@ -147,18 +147,26 @@ export default {
         ? parseFloat(this.form.rent).toFixed(2)
         : (parseFloat(this.form.rent) / WEEKLY_FACTOR).toFixed(2);
     },
+    monthlyRentInPence() {
+      if (!this.weeklyRent) {
+        return null;
+      }
+      return this.form.rentPeriod === PERIODS.WEEKLY
+        ? (this.weeklyRent * WEEKLY_FACTOR * 100).toFixed()
+        : this.form.rent * 100;
+    },
     membershipFee() {
       if (!this.weeklyRent) {
         return 0;
       }
 
       if (this.feeConfig.fixedMembershipFee) {
-        return this.fixedFee ? parseInt(this.fixedFee.toFixed(0)) : null;
+        return this.fixedFee ? parseInt(this.fixedFee.toFixed()) : null;
       }
 
       const feeBasis = Math.max(MINIMUM_MEMBERSHIP_FEE, this.weeklyRent);
 
-      return parseInt(this.addVAT(feeBasis).toFixed(0));
+      return parseInt(this.addVAT(feeBasis).toFixed());
     },
     fixedFee() {
       return this.addVAT(this.feeConfig.fixedMembershipFeeAmount / 100);
@@ -181,8 +189,15 @@ export default {
   },
   methods: {
     onSubmit() {
-      this.$store.dispatch("CREATE_FLATBOND");
-      console.log("on submit");
+      this.$store
+        .dispatch("CREATE_FLATBOND", {
+          rent: this.monthlyRentInPence,
+          postcode: this.form.postcode
+        })
+        .then(() => {
+          this.$store.dispatch("SET_FEE", this.membershipFee);
+          this.$router.push("/success");
+        });
     },
     setRent(rentValue) {
       this.rent = rentValue;

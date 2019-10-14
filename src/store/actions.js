@@ -9,20 +9,29 @@ async function FETCH_CONFIG({ commit }) {
   }
 }
 
-function CREATE_FLATBOND({ commit }) {
+function CREATE_FLATBOND({ commit }, flatbondData) {
   return new Promise(async (resolve, reject) => {
     try {
-      const status = await createFlatbond();
-      console.log("actions.js: config", status);
-      commit("SET_FLATBOND", status);
-      resolve(status);
+      const response = await createFlatbond(flatbondData);
+      const { status } = response;
+      if (status && status === "created") {
+        const { rent, postcode } = flatbondData;
+        commit("SET_RENT", rent);
+        commit("SET_POSTCODE", postcode);
+        resolve(status);
+      }
     } catch (error) {
       reject(error);
     }
   });
 }
 
+function SET_FEE({ commit }, fee) {
+  commit("SET_FEE", fee);
+}
+
 export default {
   FETCH_CONFIG,
-  CREATE_FLATBOND
+  CREATE_FLATBOND,
+  SET_FEE
 };

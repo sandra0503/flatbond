@@ -4,6 +4,7 @@
 
 - Bootstrap Vue [https://bootstrap-vue.js.org](https://bootstrap-vue.js.org)
 - Vuelidate [https://vuelidate.netlify.com](https://vuelidate.netlify.com)
+- Axios [https://github.com/axios/axios](https://github.com/axios/axios)
 
 
 ## Project setup
