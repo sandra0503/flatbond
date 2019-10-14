@@ -139,7 +139,7 @@ export default {
       return "Please enter a valid postcode.";
     },
     weeklyRent() {
-      if (!this.form.rent || !parseInt(this.form.rent)) {
+      if (!Number.isInteger(parseFloat(this.form.rent))) {
         return null;
       }
 
@@ -153,14 +153,15 @@ export default {
       }
 
       if (this.feeConfig.fixedMembershipFee) {
-        return this.feeConfig.fixedMembershipFeeAmount
-          ? this.addVAT(this.feeConfig.fixedMembershipFeeAmount)
-          : null;
+        return this.fixedFee ? parseInt(this.fixedFee.toFixed(0)) : null;
       }
 
       const feeBasis = Math.max(MINIMUM_MEMBERSHIP_FEE, this.weeklyRent);
 
       return parseInt(this.addVAT(feeBasis).toFixed(0));
+    },
+    fixedFee() {
+      return this.addVAT(this.feeConfig.fixedMembershipFeeAmount / 100);
     }
   },
   validations() {
@@ -180,6 +181,7 @@ export default {
   },
   methods: {
     onSubmit() {
+      this.$store.dispatch("CREATE_FLATBOND");
       console.log("on submit");
     },
     setRent(rentValue) {

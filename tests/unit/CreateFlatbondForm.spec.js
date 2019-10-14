@@ -134,7 +134,7 @@ describe("CreateFlatbondForm", () => {
     it("returns the fixed membership fee when fixed fee is true", () => {
       state.feeConfig = {
         fixedMembershipFee: true,
-        fixedMembershipFeeAmount: "120"
+        fixedMembershipFeeAmount: "12000"
       };
       const { wrapper, rentInput } = build();
 
@@ -146,7 +146,7 @@ describe("CreateFlatbondForm", () => {
     it("returns variable membership fee when fixed fee is false", () => {
       state.feeConfig = {
         fixedMembershipFee: false,
-        fixedMembershipFeeAmount: "120"
+        fixedMembershipFeeAmount: "12000"
       };
       const { wrapper, rentInput } = build();
 
