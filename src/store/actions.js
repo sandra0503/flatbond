@@ -20,6 +20,7 @@ function CREATE_FLATBOND({ commit }, flatbondData) {
         commit("SET_POSTCODE", postcode);
         resolve(status);
       }
+      reject();
     } catch (error) {
       reject(error);
     }

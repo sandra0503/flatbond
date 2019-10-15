@@ -209,7 +209,8 @@ export default {
         .then(() => {
           this.$store.dispatch("SET_FEE", this.membershipFee);
           this.$router.push("/success");
-        });
+        })
+        .catch();
     },
     setRent(rentValue) {
       this.rent = rentValue;
