@@ -23,13 +23,18 @@ export async function fetchConfig() {
   return feeConfig;
 }
 
-export async function createFlatbond(rent, postcode) {
+export async function createFlatbond(flatbondData) {
   let status;
+  const { rent, postcode } = flatbondData;
+
+  if (!rent || !postcode) {
+    return;
+  }
 
   await instance
     .post("/flatbond", {
-      rent: rent,
-      postcode: postcode
+      rent,
+      postcode
     })
     .then(result => {
       status = result.data;
