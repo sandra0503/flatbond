@@ -144,8 +144,8 @@ export default {
       }
 
       return this.form.rentPeriod === PERIODS.WEEKLY
-        ? parseFloat(this.form.rent).toFixed(2)
-        : (parseFloat(this.form.rent) / WEEKLY_FACTOR).toFixed(2);
+        ? this.form.rent
+        : this.form.rent / WEEKLY_FACTOR;
     },
     monthlyRentInPence() {
       if (!this.weeklyRent) {
@@ -156,20 +156,26 @@ export default {
         : this.form.rent * 100;
     },
     membershipFee() {
+      if (this.feeConfig.fixedMembershipFee) {
+        return this.fixedFee ? this.fixedFee : null;
+      }
+
+      return this.flexibleFee;
+    },
+    fixedFee() {
+      const fee =
+        this.feeConfig.fixedMembershipFeeAmount &&
+        this.feeConfig.fixedMembershipFeeAmount / 100;
+      return this.getRoundNumber(this.addVAT(fee));
+    },
+    flexibleFee() {
       if (!this.weeklyRent) {
         return 0;
       }
 
-      if (this.feeConfig.fixedMembershipFee) {
-        return this.fixedFee ? parseInt(this.fixedFee.toFixed()) : null;
-      }
-
       const feeBasis = Math.max(MINIMUM_MEMBERSHIP_FEE, this.weeklyRent);
 
-      return parseInt(this.addVAT(feeBasis).toFixed());
-    },
-    fixedFee() {
-      return this.addVAT(this.feeConfig.fixedMembershipFeeAmount / 100);
+      return this.getRoundNumber(this.addVAT(feeBasis));
     }
   },
   validations() {
@@ -209,6 +215,9 @@ export default {
     },
     addVAT(amount) {
       return amount * VAT_FACTOR;
+    },
+    getRoundNumber(number) {
+      return parseInt(number.toFixed());
     }
   }
 };
