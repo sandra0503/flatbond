@@ -12,12 +12,12 @@
           <td class="value rentValue">{{ formatMonthlyRent }} £</td>
         </tr>
         <tr>
-          <th class="label">Membership fee:</th>
-          <td class="value feeValue">{{ fee }} £</td>
-        </tr>
-        <tr>
           <th class="label">Postcode:</th>
           <td class="value postcodeValue">{{ postcode }}</td>
+        </tr>
+        <tr>
+          <th class="label">Membership fee:</th>
+          <td class="value feeValue">{{ fee }} £</td>
         </tr>
       </table>
     </div>
