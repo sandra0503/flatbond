@@ -4,6 +4,7 @@ $blue: #6785ff !default;
 $red: #ff7675 !default;
 $green: #00cec9;
 
+
 .custom-control {
   &.custom-radio {
     display: inline-block;
@@ -15,7 +16,16 @@ $green: #00cec9;
   }
 }
 .form-group {
+  margin-top: 25px;
+
   > label {
     font-weight: 600;
   }
 }
+
+.input-group {
+  .input-group-text {
+    background-color: #f3f5f6;
+  }
+}
+

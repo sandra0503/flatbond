@@ -5,10 +5,11 @@ exports[`Create view renders the component and matches snapshot 1`] = `
   <div class="create__introduction">
     <h1>Welcome to flatfair!</h1>
     <p>
-      To create your personal flatbond, we need some information about your
-      new home:
+      To create your personal flatbond, we need some details about your new
+      home.
     </p>
   </div>
   <!---->
+  <div class="create__illustration"><img src="../assets/house.png"></div>
 </div>
 `;

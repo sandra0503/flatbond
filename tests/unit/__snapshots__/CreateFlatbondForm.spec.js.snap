@@ -2,13 +2,13 @@
 
 exports[`CreateFlatbondForm renders the component and matches snapshot 1`] = `
 <form class="create-flatbond-form">
-  <div role="group" class="form-group"><label for="rent" class="d-block">Your rent</label>
+  <div role="group" class="form-group"><label for="rent" class="d-block">Rent:</label>
     <div>
       <div role="group" class="input-group">
         <div class="input-group-prepend">
           <div class="input-group-text">£</div>
           <!---->
-        </div><input id="rent-input" type="text" placeholder="Enter your rent" class="form-control">
+        </div><input id="rent-input" type="text" placeholder="Your rent" class="form-control">
         <div class="input-group-append">
           <div class="input-group-text">.00</div>
           <!---->
@@ -19,26 +19,20 @@ exports[`CreateFlatbondForm renders the component and matches snapshot 1`] = `
       <!---->
     </div>
   </div>
-  <fieldset class="form-group">
-    <!---->
-    <div tabindex="-1" role="group">
-      <div class="custom-control custom-radio"><input type="radio" name="payment-period-radios" autocomplete="off" class="custom-control-input" value="weekly"><label class="custom-control-label">Weekly</label></div>
-      <div class="custom-control custom-radio"><input type="radio" name="payment-period-radios" autocomplete="off" class="custom-control-input" value="monthly"><label class="custom-control-label">Monthly</label></div>
-      <!---->
-      <!---->
-      <!---->
-    </div>
-  </fieldset>
-  <div role="group" class="form-group"><label for="fee" class="d-block">Your fee</label>
+  <div>
+    <div class="custom-control custom-radio"><input type="radio" name="payment-period-radios" autocomplete="off" class="custom-control-input" value="weekly"><label class="custom-control-label">Weekly</label></div>
+    <div class="custom-control custom-radio"><input type="radio" name="payment-period-radios" autocomplete="off" class="custom-control-input" value="monthly"><label class="custom-control-label">Monthly</label></div>
+  </div>
+  <div role="group" class="form-group"><label for="fee" class="d-block">Your one-off membership fee:</label>
     <div>
-      <div class="membership-fee">0</div>
+      <div class="membership-fee">£ 0</div>
       <!---->
       <!---->
       <!---->
     </div>
   </div>
-  <div role="group" class="form-group fieldset-postcode"><label for="postcode" class="d-block">Your postcode</label>
-    <div><input id="postcode-input" type="text" placeholder="Enter your postcode" class="form-control">
+  <div role="group" class="form-group fieldset-postcode"><label for="postcode" class="d-block">Postcode:</label>
+    <div><input id="postcode-input" type="text" placeholder="Postcode" class="form-control">
       <div tabindex="-1" role="alert" aria-live="assertive" aria-atomic="true" class="invalid-feedback">Please enter a valid postcode.</div>
       <!---->
       <!---->

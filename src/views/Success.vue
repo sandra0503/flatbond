@@ -1,14 +1,29 @@
 <template>
   <div class="success">
-    <router-link to="/">back</router-link>
-    <h1>Thank you!</h1>
-    <div>Your flatbond was created with the following details:</div>
-    <div>Monthly rent:</div>
-    <div class="rentValue">{{ formatMonthlyRent }} £</div>
-    <div>Membership fee:</div>
-    <div class="feeValue">{{ fee }} £</div>
-    <div>Postcode:</div>
-    <div class="postcodeValue">{{ postcode }}</div>
+    <router-link to="/" class="back-link"
+      ><i class="arrow-left" />Back to previous page</router-link
+    >
+    <div class="success__content">
+      <h1>Thank you!</h1>
+      <div>Your flatbond was created with the following details:</div>
+      <table class="details-table">
+        <tr>
+          <th class="label">Monthly rent:</th>
+          <td class="value rentValue">{{ formatMonthlyRent }} £</td>
+        </tr>
+        <tr>
+          <th class="label">Membership fee:</th>
+          <td class="value feeValue">{{ fee }} £</td>
+        </tr>
+        <tr>
+          <th class="label">Postcode:</th>
+          <td class="value postcodeValue">{{ postcode }}</td>
+        </tr>
+      </table>
+    </div>
+    <div class="sucess__illustration">
+      <img src="../assets/home.png" />
+    </div>
   </div>
 </template>
 
@@ -30,10 +45,68 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .success {
   text-align: center;
-  max-width: 480px;
+  max-width: 1024px;
   margin: 0 auto;
+}
+
+.success__content {
+  padding-top: 30px;
+}
+
+.back-link {
+  width: 100%;
+  display: inline-block;
+  text-align: left;
+  color: #6785ff;
+  text-decoration: none;
+  font-weight: 500;
+
+  &:hover {
+    color: #4166ff;
+  }
+}
+
+.arrow-left {
+  border: solid #6785ff;
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 3px;
+  margin-right: 4px;
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
+
+.details-table {
+  margin: 25px auto;
+  font-size: 18px;
+
+  .label,
+  .value {
+    width: 50%;
+    text-align: right;
+    padding: 5px;
+  }
+
+  .value {
+    text-align: left;
+  }
+}
+
+.sucess__illustration {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 35%;
+  min-width: 300px;
+  height: auto;
+  opacity: 0.9;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
 }
 </style>

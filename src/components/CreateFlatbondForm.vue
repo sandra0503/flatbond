@@ -3,7 +3,7 @@
     <b-form-group
       :invalid-feedback="invalidFeedbackRent"
       :state="$v.form.rent.$dirty ? !$v.form.rent.$error : null"
-      label="Your rent"
+      label="Rent:"
       label-for="rent"
     >
       <b-input-group prepend="£" append=".00">
@@ -11,7 +11,7 @@
           :state="$v.form.rent.$dirty ? !$v.form.rent.$error : null"
           :number="true"
           v-model="form.rent"
-          placeholder="Enter your rent"
+          placeholder="Your rent"
           id="rent-input"
           trim
           @input="setRent"
@@ -19,7 +19,7 @@
       </b-input-group>
     </b-form-group>
 
-    <b-form-group>
+    <div>
       <b-form-radio
         v-model="form.rentPeriod"
         name="payment-period-radios"
@@ -32,24 +32,24 @@
         value="monthly"
         >Monthly</b-form-radio
       >
-    </b-form-group>
+    </div>
 
-    <b-form-group label="Your fee" label-for="fee">
-      <div class="membership-fee">{{ membershipFee }}</div>
+    <b-form-group label="Your one-off membership fee:" label-for="fee">
+      <div class="membership-fee">£ {{ membershipFee }}</div>
     </b-form-group>
 
     <b-form-group
       :invalid-feedback="invalidFeedbackPostcode"
       :state="$v.form.postcode.$dirty ? !$v.form.postcode.$error : null"
       class="fieldset-postcode"
-      label="Your postcode"
+      label="Postcode:"
       label-for="postcode"
     >
       <b-form-input
         :state="$v.form.postcode.$dirty ? !$v.form.postcode.$error : null"
         v-model="form.postcode"
         id="postcode-input"
-        placeholder="Enter your postcode"
+        placeholder="Postcode"
         trim
         @input="setPostcode"
       ></b-form-input>
@@ -153,10 +153,10 @@ export default {
       }
       return this.form.rentPeriod === PERIODS.WEEKLY
         ? (this.weeklyRent * WEEKLY_FACTOR * 100).toFixed()
-        : this.form.rent * 100;
+        : (this.form.rent * 100).toFixed();
     },
     membershipFee() {
-      if (this.feeConfig.fixedMembershipFee) {
+      if (this.weeklyRent && this.feeConfig.fixedMembershipFee) {
         return this.fixedFee ? this.fixedFee : null;
       }
 
@@ -195,6 +195,12 @@ export default {
   },
   methods: {
     onSubmit() {
+      console.log(
+        "submit with this.monthlyRentInPence",
+        this.monthlyRentInPence,
+        " postcode",
+        this.form.postcode
+      );
       this.$store
         .dispatch("CREATE_FLATBOND", {
           rent: this.monthlyRentInPence,
@@ -226,14 +232,21 @@ export default {
 <style scoped lang="scss">
 .create-flatbond-form {
   text-align: left;
-}
-
-.fieldset-postcode {
-  margin-top: 25px;
+  max-width: 480px;
+  margin: auto;
 }
 
 .btn {
   margin: 25px auto;
   display: block;
+}
+
+.membership-fee {
+  font-family: "Lato", sans-serif;
+  font-weight: 700;
+  background: #f3f5f6;
+  border-radius: 0.25rem;
+  text-align: center;
+  padding: 10px 50px;
 }
 </style>

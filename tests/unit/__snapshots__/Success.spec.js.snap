@@ -2,14 +2,25 @@
 
 exports[`Success view renders the component and matches snapshot 1`] = `
 <div class="success">
-  <router-link-stub to="/" tag="a" event="click">back</router-link-stub>
-  <h1>Thank you!</h1>
-  <div>Your flatbond was created with the following details:</div>
-  <div>Monthly rent:</div>
-  <div class="rentValue">200.00 £</div>
-  <div>Membership fee:</div>
-  <div class="feeValue">144 £</div>
-  <div>Postcode:</div>
-  <div class="postcodeValue">WC2N 5DU</div>
+  <router-link-stub to="/" tag="a" event="click" class="back-link"><i class="arrow-left"></i>Back to previous page</router-link-stub>
+  <div class="success__content">
+    <h1>Thank you!</h1>
+    <div>Your flatbond was created with the following details:</div>
+    <table class="details-table">
+      <tr>
+        <th class="label">Monthly rent:</th>
+        <td class="value rentValue">200.00 £</td>
+      </tr>
+      <tr>
+        <th class="label">Membership fee:</th>
+        <td class="value feeValue">144 £</td>
+      </tr>
+      <tr>
+        <th class="label">Postcode:</th>
+        <td class="value postcodeValue">WC2N 5DU</td>
+      </tr>
+    </table>
+  </div>
+  <div class="sucess__illustration"><img src="../assets/home.png"></div>
 </div>
 `;
