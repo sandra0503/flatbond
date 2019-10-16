@@ -7,21 +7,24 @@
         home.
       </p>
     </div>
-    <CreateFlatbondForm v-if="isMembershipFeeConfigPresent" />
-    <div class="create__illustration">
-      <img src="../assets/house.png" />
-    </div>
+    <CreateFlatbondForm
+      @submitted="createFlatbond"
+      v-if="isMembershipFeeConfigPresent"
+    />
+    <Illustration :imageSrc="require('@/assets/house.png')" />
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
 import CreateFlatbondForm from "@/components/CreateFlatbondForm.vue";
+import Illustration from "@/components/Illustration.vue";
 
 export default {
   name: "create",
   components: {
-    CreateFlatbondForm
+    CreateFlatbondForm,
+    Illustration
   },
   computed: {
     ...mapState(["feeConfig"]),
@@ -33,6 +36,24 @@ export default {
   },
   created() {
     this.$store.dispatch("FETCH_CONFIG");
+  },
+  methods: {
+    createFlatbond(flatbondData) {
+      const { rent, postcode, fee } = flatbondData;
+
+      this.$store
+        .dispatch("CREATE_FLATBOND", {
+          rent: rent,
+          postcode: postcode
+        })
+        .then(() => {
+          this.$store.dispatch("SET_FEE", fee);
+          this.$router.push("/success");
+        })
+        .catch(() => {
+          this.error = true;
+        });
+    }
   }
 };
 </script>
@@ -50,21 +71,5 @@ export default {
   margin-bottom: 25px;
   max-width: 480px;
   margin: auto;
-}
-
-.create__illustration {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 35%;
-  min-width: 300px;
-  max-width: 450px;
-  height: auto;
-  opacity: 0.7;
-
-  img {
-    width: 100%;
-    height: auto;
-  }
 }
 </style>

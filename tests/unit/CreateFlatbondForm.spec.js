@@ -1,8 +1,10 @@
+jest.mock("@/store/actions");
 import { mount, createLocalVue } from "@vue/test-utils";
 import Vuex from "vuex";
 import Vuelidate from "vuelidate";
 import CreateFlatbondForm from "@/components/CreateFlatbondForm";
 import initialState from "@/store/state";
+import actions from "@/store/actions";
 
 const localVue = createLocalVue();
 
@@ -14,12 +16,14 @@ describe("CreateFlatbondForm", () => {
 
   const build = () => {
     const wrapper = mount(CreateFlatbondForm, {
-      localVue,
-      store: new Vuex.Store({ state })
+      store: new Vuex.Store({ state, actions }),
+      attachToDocument: true,
+      localVue
     });
 
     return {
       wrapper,
+      form: () => wrapper.find("form"),
       rentInput: () => wrapper.find("#rent-input"),
       postcodeInput: () => wrapper.find("#postcode-input"),
       submitButton: () => wrapper.find(".btn.btn-primary")
@@ -189,5 +193,23 @@ describe("CreateFlatbondForm", () => {
       rentInput().vm.$emit("input", "9999");
       expect(wrapper.vm.membershipFee).toBe(2769);
     });
+  });
+
+  it("'calls 'submitted' event when submitting form", () => {
+    const { wrapper, rentInput, postcodeInput, form } = build();
+
+    const flatbondData = {
+      rent: 10000,
+      postcode: "WC2N 5DU",
+      fee: 144
+    };
+
+    rentInput().vm.$emit("input", "100");
+    postcodeInput().vm.$emit("input", "WC2N 5DU");
+    wrapper.vm.form.rentPeriod = "monthly";
+    form().trigger("submit.prevent");
+
+    expect(wrapper.emitted().submitted).toBeTruthy();
+    expect(wrapper.emitted().submitted[0]).toEqual([flatbondData]);
   });
 });

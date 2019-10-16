@@ -21,6 +21,6 @@ exports[`Success view renders the component and matches snapshot 1`] = `
       </tr>
     </table>
   </div>
-  <div class="sucess__illustration"><img src="../assets/home.png"></div>
+  <illustration-stub imagesrc="../assets/home.png" position="right"></illustration-stub>
 </div>
 `;

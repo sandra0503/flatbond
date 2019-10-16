@@ -37,12 +37,12 @@ describe("Success view", () => {
   it("renders main content elements", () => {
     const { rentValue, postcodeValue, feeValue } = build();
     expect(rentValue().exists()).toBe(true);
-    expect(postcodeValue().exists()).toBe(true);
-    expect(feeValue().exists()).toBe(true);
-  });
-
-  it("formats the rent value correctly", () => {
-    const { rentValue } = build();
     expect(rentValue().text()).toBe("200.00 £");
+
+    expect(postcodeValue().exists()).toBe(true);
+    expect(postcodeValue().text()).toBe("WC2N 5DU");
+
+    expect(feeValue().exists()).toBe(true);
+    expect(feeValue().text()).toBe("144 £");
   });
 });

@@ -157,8 +157,8 @@ export default {
         return null;
       }
       return this.form.rentPeriod === PERIODS.WEEKLY
-        ? (this.weeklyRent * WEEKLY_FACTOR * 100).toFixed()
-        : (this.form.rent * 100).toFixed();
+        ? parseInt((this.weeklyRent * WEEKLY_FACTOR * 100).toFixed())
+        : parseInt((this.form.rent * 100).toFixed());
     },
     membershipFee() {
       if (this.weeklyRent && this.feeConfig.fixedMembershipFee) {
@@ -200,18 +200,12 @@ export default {
   },
   methods: {
     onSubmit() {
-      this.$store
-        .dispatch("CREATE_FLATBOND", {
-          rent: this.monthlyRentInPence,
-          postcode: this.form.postcode
-        })
-        .then(() => {
-          this.$store.dispatch("SET_FEE", this.membershipFee);
-          this.$router.push("/success");
-        })
-        .catch(() => {
-          this.error = true;
-        });
+      const flatbondData = {
+        rent: this.monthlyRentInPence,
+        postcode: this.form.postcode,
+        fee: this.membershipFee
+      };
+      this.$emit("submitted", flatbondData);
     },
     setRent(rentValue) {
       this.rent = rentValue;

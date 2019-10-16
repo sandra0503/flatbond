@@ -21,9 +21,7 @@
         </tr>
       </table>
     </div>
-    <div class="sucess__illustration">
-      <img src="../assets/home.png" />
-    </div>
+    <Illustration :imageSrc="require('@/assets/home.png')" position="right" />
   </div>
 </template>
 
@@ -31,11 +29,15 @@
 import { mapState } from "vuex";
 import Vue from "vue";
 import Router from "vue-router";
+import Illustration from "@/components/Illustration.vue";
 
 Vue.use(Router);
 
 export default {
   name: "success",
+  components: {
+    Illustration
+  },
   computed: {
     ...mapState(["rent", "postcode", "fee"]),
     formatMonthlyRent() {
@@ -91,22 +93,6 @@ export default {
 
   .value {
     text-align: left;
-  }
-}
-
-.sucess__illustration {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 35%;
-  min-width: 300px;
-  max-width: 400px;
-  height: auto;
-  opacity: 0.9;
-
-  img {
-    width: 100%;
-    height: auto;
   }
 }
 </style>
