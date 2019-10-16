@@ -12,7 +12,8 @@ export default {
       type: String
     },
     position: {
-      type: String
+      type: String,
+      default: "left"
     }
   },
   computed: {

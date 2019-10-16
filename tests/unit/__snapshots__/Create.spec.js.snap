@@ -10,6 +10,6 @@ exports[`Create view renders the component and matches snapshot 1`] = `
     </p>
   </div>
   <!---->
-  <illustration-stub imagesrc="../assets/house.png"></illustration-stub>
+  <illustration-stub imagesrc="" position="left"></illustration-stub>
 </div>
 `;

@@ -34,12 +34,11 @@ h1 {
 header {
   background-color: var(--blue);
   font-family: "Lato", sans-serif;
-  font-weight: 700;
-  color: #fff;
   font-size: 20px;
   font-weight: bold;
+  color: #fff;
   text-align: left;
-  padding: 20px 0;
+  padding: 20px;
 
   .header__container {
     max-width: 1024px;
@@ -49,7 +48,6 @@ header {
 
 main {
   position: relative;
-  min-height: calc(100vh - 70px);
   padding-top: 30px;
   margin: 0 20px;
 }
