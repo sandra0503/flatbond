@@ -34,10 +34,6 @@
       >
     </div>
 
-    <b-form-group label="Your one-off membership fee:" label-for="fee">
-      <div class="membership-fee">£ {{ membershipFee }}</div>
-    </b-form-group>
-
     <b-form-group
       :invalid-feedback="invalidFeedbackPostcode"
       :state="$v.form.postcode.$dirty ? !$v.form.postcode.$error : null"
@@ -54,6 +50,14 @@
         @input="setPostcode"
       ></b-form-input>
     </b-form-group>
+
+    <b-form-group label="Your one-off membership fee:" label-for="fee">
+      <div class="membership-fee">£ {{ membershipFee }}</div>
+    </b-form-group>
+
+    <div class="error" v-if="error">
+      Ooops. Something went wrong. Please check your data and try again.
+    </div>
     <b-button
       :disabled="$v.form.$invalid"
       type="submit"
@@ -114,7 +118,8 @@ export default {
         rent: null,
         rentPeriod: PERIODS.WEEKLY,
         postcode: null
-      }
+      },
+      error: false
     };
   },
   computed: {
@@ -195,12 +200,6 @@ export default {
   },
   methods: {
     onSubmit() {
-      console.log(
-        "submit with this.monthlyRentInPence",
-        this.monthlyRentInPence,
-        " postcode",
-        this.form.postcode
-      );
       this.$store
         .dispatch("CREATE_FLATBOND", {
           rent: this.monthlyRentInPence,
@@ -210,17 +209,22 @@ export default {
           this.$store.dispatch("SET_FEE", this.membershipFee);
           this.$router.push("/success");
         })
-        .catch(err => {
-          console.log(err);
+        .catch(() => {
+          this.error = true;
         });
     },
     setRent(rentValue) {
       this.rent = rentValue;
       this.$v.form.rent.$model = this.rent;
+      this.resetErrorMessage();
     },
     setPostcode(postcode) {
       this.postcode = postcode.toUpperCase();
       this.$v.form.postcode.$model = this.postcode;
+      this.resetErrorMessage();
+    },
+    resetErrorMessage() {
+      this.error = false;
     },
     addVAT(amount) {
       return amount * VAT_FACTOR;
@@ -237,6 +241,10 @@ export default {
   text-align: left;
   max-width: 480px;
   margin: auto;
+}
+
+.error {
+  color: var(--red);
 }
 
 .btn {

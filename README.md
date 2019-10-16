@@ -27,3 +27,10 @@ npm run build
 ```
 npm run test:unit
 ```
+
+## Next Steps
+
+To further improve the product, future iterations would consider accesssibility as well as stability of the code. 
+
+- Screen reader support
+- Extend test coverage

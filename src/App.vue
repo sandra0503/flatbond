@@ -32,7 +32,7 @@ h1 {
 }
 
 header {
-  background-color: #6785ff;
+  background-color: var(--blue);
   font-family: "Lato", sans-serif;
   font-weight: 700;
   color: #fff;

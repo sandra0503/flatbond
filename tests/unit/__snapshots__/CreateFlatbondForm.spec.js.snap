@@ -23,6 +23,13 @@ exports[`CreateFlatbondForm renders the component and matches snapshot 1`] = `
     <div class="custom-control custom-radio"><input type="radio" name="payment-period-radios" autocomplete="off" class="custom-control-input" value="weekly"><label class="custom-control-label">Weekly</label></div>
     <div class="custom-control custom-radio"><input type="radio" name="payment-period-radios" autocomplete="off" class="custom-control-input" value="monthly"><label class="custom-control-label">Monthly</label></div>
   </div>
+  <div role="group" class="form-group fieldset-postcode"><label for="postcode" class="d-block">Postcode:</label>
+    <div><input id="postcode-input" type="text" placeholder="Postcode" class="form-control">
+      <div tabindex="-1" role="alert" aria-live="assertive" aria-atomic="true" class="invalid-feedback">Please enter a valid postcode.</div>
+      <!---->
+      <!---->
+    </div>
+  </div>
   <div role="group" class="form-group"><label for="fee" class="d-block">Your one-off membership fee:</label>
     <div>
       <div class="membership-fee">£ 0</div>
@@ -31,12 +38,6 @@ exports[`CreateFlatbondForm renders the component and matches snapshot 1`] = `
       <!---->
     </div>
   </div>
-  <div role="group" class="form-group fieldset-postcode"><label for="postcode" class="d-block">Postcode:</label>
-    <div><input id="postcode-input" type="text" placeholder="Postcode" class="form-control">
-      <div tabindex="-1" role="alert" aria-live="assertive" aria-atomic="true" class="invalid-feedback">Please enter a valid postcode.</div>
-      <!---->
-      <!---->
-    </div>
-  </div> <button type="submit" disabled="disabled" class="btn submitButton btn-primary disabled">Submit</button>
+  <!----> <button type="submit" disabled="disabled" class="btn submitButton btn-primary disabled">Submit</button>
 </form>
 `;

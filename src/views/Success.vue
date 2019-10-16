@@ -53,14 +53,14 @@ export default {
 }
 
 .success__content {
-  padding-top: 30px;
+  padding: 30px 0 250px;
 }
 
 .back-link {
   width: 100%;
   display: inline-block;
   text-align: left;
-  color: #6785ff;
+  color: var(--blue);
   text-decoration: none;
   font-weight: 500;
 
@@ -70,7 +70,7 @@ export default {
 }
 
 .arrow-left {
-  border: solid #6785ff;
+  border: solid var(--blue);
   border-width: 0 2px 2px 0;
   display: inline-block;
   padding: 3px;
@@ -81,7 +81,6 @@ export default {
 
 .details-table {
   margin: 25px auto;
-  font-size: 18px;
 
   .label,
   .value {
@@ -101,6 +100,7 @@ export default {
   right: 0;
   width: 35%;
   min-width: 300px;
+  max-width: 400px;
   height: auto;
   opacity: 0.9;
 

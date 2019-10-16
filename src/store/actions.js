@@ -13,7 +13,8 @@ function CREATE_FLATBOND({ commit }, flatbondData) {
   return new Promise(async (resolve, reject) => {
     try {
       const response = await createFlatbond(flatbondData);
-      const { status } = response;
+      const { status } = response || {};
+
       if (status && status === "created") {
         const { rent, postcode } = flatbondData;
         commit("SET_RENT", rent);
