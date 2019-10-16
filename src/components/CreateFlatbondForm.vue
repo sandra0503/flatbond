@@ -1,5 +1,5 @@
 <template>
-  <b-form class="create-flatbond-form" @submit="onSubmit">
+  <b-form class="create-flatbond-form" @submit.prevent="onSubmit">
     <b-form-group
       :invalid-feedback="invalidFeedbackRent"
       :state="$v.form.rent.$dirty ? !$v.form.rent.$error : null"
@@ -210,7 +210,9 @@ export default {
           this.$store.dispatch("SET_FEE", this.membershipFee);
           this.$router.push("/success");
         })
-        .catch();
+        .catch(err => {
+          console.log(err);
+        });
     },
     setRent(rentValue) {
       this.rent = rentValue;
